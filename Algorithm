@@ -1,0 +1,33 @@
+Algorithmic Description Of Methods 
+
+A . Robust K-means for sequences  
+Input: Categorical dataset and initial value of cluster k;
+Output: The set of resulting clusters C being the number of nonnoise clusters. 
+Begin
+       1. Convert the categorical dataset into binary dataset using latine-1 encoding method
+       2. Apply the PCA algorithm on binary data set plant_df .
+       3. Let q be the number of iterations , q=0. Denote the initial clustering of  S by C(0) = ø;
+       4. Let K  be the number of resulting clusters,  K= Ḱ ;
+       5. Repeat
+              5.1 q=q+1 ;
+              5.2 Generate K  clusters by assigning each element in dataset to its nearby cluster.
+                     Denote the new clustering by  C(q) ;
+              5.3 Remove K- Dependent noise from  C(q) by calling the  Noise Detection Algorithm 
+                    and update the number of cluster   K = | C(q) |.
+              5.4 Recompute the centroid for each cluster in V  by averaging the vectors belonging 
+                    to that cluster.
+       until C(q) = C(q-1) ;
+       6. Output C(q) ,
+ End 
+B. Noise Detection Routine
+Input: C
+Begin 
+        1. Let   O = {Ck | Ck ϵ C and  nk = 1}. If O = ø then go to step 3.
+        2. Otherwise, choose one cluster from O  and delete it from C  ; assign each object in   
+             that cluster to its closest cluster and return;
+        3. for each Ck  ϵ C  satisfying  nk  ≤ τ do
+                3.1 Create C' by deleting Ck   from C  and assigning the objects in Ck to their 
+                      respective closest cluster ;
+                3.2  If  CVIc(C') ≤ CVIc(C) then replace C  with C' and return.
+        End
+End
